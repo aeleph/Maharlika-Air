@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bisaya Airlines</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'flag-blue': '#0038A8',
+            'flag-red' : '#CE1126'
+          }
+        }
+      }
+    }
+  </script>
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- LOADING SCREEN -->
+  <div id="loader">
+    <div class="flex flex-col items-center">
+      <img src="images/Maharlika_air.jpg" class="mb-12 animate-pulse">
+      <p class="text-blue-900 font-semibold text-lg">
+        Your next royal adventure awaits…
+      </p>
+    </div>
+  </div>
+
+<!-- NAVBAR -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <!-- LOGO + BRAND NAME -->
+    <div class="flex items-center space-x-1">
+  <img src="images/MaharlikaAirLogo.png" 
+       alt="Maharlika Air Logo" 
+       class="max-h-12 w-auto">
+
+  <div class="leading-tight">
+    <h1 class="text-2xl font-bold text-blue-900">Maharlika Air</h1>
+    <p class="text-xs text-gray-600 -mt-1 tracking-wide">Fly with Royal Comfort</p>
+  </div>
+</div>
+
+    <ul class="hidden md:flex space-x-8 text-blue-900 font-medium">
+      <li><a href="#" class="hover:text-red-600">Home</a></li>
+      <li><a href="#" class="hover:text-red-600">Flights</a></li>
+      <li><a href="#" class="hover:text-red-600">Manage Booking</a></li>
+      <li><a href="#" class="hover:text-red-600">Promos</a></li>
+    </ul>
+
+  </div>
+</nav>
+
+
+  <!-- HERO SECTION -->
+  <section class="pal-bg relative text-white">
+    <div class="max-w-7xl mx-auto px-6 py-28">
+      <h2 class="text-5xl font-bold leading-tight">Experience Flight, the Maharlika Way</h2>
+      <p class="mt-4 text-lg text-gray-200">
+        Search flights, view deals, and explore your next destination.
+      </p>
+    </div>
+  </section>
+
+  <!-- FLIGHT SEARCH BOX -->
+  <section class="max-w-5xl mx-auto -mt-20 px-6">
+    <div class="bg-white shadow-lg p-8 rounded-2xl border border-gray-200 search-card">
+      <h3 class="text-xl font-semibold text-blue-900 mb-4">Search Flights</h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        
+        <!-- FROM -->
+        <div>
+          <label class="text-sm font-medium text-gray-600">From</label>
+          <input id="from" type="text" placeholder="MNL"
+            class="w-full mt-1 border rounded-lg px-4 py-2">
+        </div>
+
+        <!-- TO -->
+        <div>
+          <label class="text-sm font-medium text-gray-600">To</label>
+          <input id="to" type="text" placeholder="CEB"
+            class="w-full mt-1 border rounded-lg px-4 py-2">
+        </div>
+
+        <!-- DATE -->
+        <div>
+          <label class="text-sm font-medium text-gray-600">Departure Date</label>
+          <input id="date" type="date"
+            class="w-full mt-1 border rounded-lg px-4 py-2">
+        </div>
+
+        <!-- SEARCH BUTTON -->
+        <div class="flex items-end">
+          <button 
+            onclick="searchFlights()" 
+            class="pal-btn text-white w-full py-3 rounded-lg font-semibold shadow">
+            Search Flights
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="max-w-6xl mx-auto px-6 mt-16" id="results"></section>
+
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

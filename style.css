@@ -1,0 +1,89 @@
+/* GLOBAL */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f5f7fa;
+}
+
+/* PAL-STYLE GRADIENT */
+.pal-bg {
+  background: linear-gradient(135deg, #00246a 0%, #0038A8 100%);
+}
+
+/* PAL RED BUTTON */
+.pal-btn {
+  background: #CE1126;
+  transition: 0.2s ease;
+}
+.pal-btn:hover {
+  background: #a50e1f;
+  transform: translateY(-2px);
+}
+
+/* NAVBAR STYLING */
+nav {
+  backdrop-filter: blur(10px);
+}
+nav h1 {
+  letter-spacing: -0.5px;
+}
+nav ul li a {
+  transition: 0.2s ease;
+  color: #0038A8
+}
+
+/* SEARCH BOX CARD */
+.search-card {
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+input {
+  transition: 0.15s ease;
+}
+input:focus {
+  border-color: #0038A8;
+  box-shadow: 0 0 0 2px rgba(0, 56, 168, 0.2);
+}
+
+/* LOADING SCREEN */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease;
+}
+
+#loader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#loader img {
+  width: 420px;   /* Adjust as needed */
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+#loader p {
+  animation: fadeText 1.5s infinite ease-in-out alternate;
+}
+
+@keyframes fadeText {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* FLIGHT RESULT CARD */
+.result-card {
+  transition: 0.25s ease;
+}
+.result-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
