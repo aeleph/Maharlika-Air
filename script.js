@@ -19,3 +19,30 @@ function searchFlights() {
     </div>
   `;
 }
+
+function openAuthModal(mode) {
+  document.getElementById("authModal").classList.remove("hidden");
+
+  if (mode === "login") {
+    switchToLogin();
+  } else {
+    switchToSignup();
+  }
+}
+
+function closeAuthModal() {
+  document.getElementById("authModal").classList.add("hidden");
+}
+
+function switchToSignup() {
+  document.getElementById("loginForm").classList.add("hidden");
+  document.getElementById("signupForm").classList.remove("hidden");
+  document.getElementById("modalTitle").innerText = "Sign Up";
+}
+
+function switchToLogin() {
+  document.getElementById("signupForm").classList.add("hidden");
+  document.getElementById("loginForm").classList.remove("hidden");
+  document.getElementById("modalTitle").innerText = "Log In";
+}
+
