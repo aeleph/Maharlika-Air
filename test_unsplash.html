@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maharlika Air Destinations</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding-bottom: 100px;
+        }
+
+        .section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #0038A8;
+        }
+
+        .slideshow {
+            width: 80%;
+            max-width: 900px;
+            height: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            background: #000;
+        }
+
+        .slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .slideshow img.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- JAPAN -->
+    <div class="section">
+        <h2>🇯🇵 Explore Japan</h2>
+        <div id="slideshow-japan" class="slideshow"></div>
+    </div>
+
+    <!-- SINGAPORE -->
+    <div class="section">
+        <h2>🇸🇬 Discover Singapore</h2>
+        <div id="slideshow-singapore" class="slideshow"></div>
+    </div>
+
+    <!-- VIETNAM -->
+    <div class="section">
+        <h2>🇻🇳 Experience Vietnam</h2>
+        <div id="slideshow-vietnam" class="slideshow"></div>
+    </div>
+
+    <!-- SOUTH KOREA -->
+    <div class="section">
+        <h2>🇰🇷 Visit South Korea</h2>
+        <div id="slideshow-korea" class="slideshow"></div>
+    </div>
+
+    <!-- PHILIPPINES -->
+    <div class="section">
+        <h2>🇵🇭 Explore the Philippines</h2>
+        <div id="slideshow-philippines" class="slideshow"></div>
+    </div>
+
+
+    <script>
+    const ACCESS_KEY = "ACCESS KEY HERE"; //YiRlBBaa5gPWVr4bKuGeup-vNALhOUfuW-ykT3I3tUs
+
+    // Slideshow definitions
+    const slideshows = [
+        { id: "slideshow-japan", query: "japan travel" },
+        { id: "slideshow-singapore", query: "singapore city" },
+        { id: "slideshow-vietnam", query: "vietnam landscape" },
+        { id: "slideshow-korea", query: "south korea travel" },
+        { id: "slideshow-philippines", query: "philippines beach" }
+    ];
+
+    // Store active intervals for each slideshow
+    const intervals = {};
+
+    slideshows.forEach(country => {
+        loadImages(country.id, country.query);
+    });
+
+    async function loadImages(containerId, searchQuery) {
+        const url = `https://api.unsplash.com/search/photos?query=${searchQuery}&per_page=6&orientation=landscape&client_id=${ACCESS_KEY}`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+        const imageUrls = data.results.map(p => p.urls.regular);
+
+        displaySlideshow(containerId, imageUrls);
+    }
+
+    function displaySlideshow(containerId, images) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+
+        images.forEach((src, i) => {
+            let img = document.createElement("img");
+            img.src = src;
+            if (i === 0) img.classList.add("active");
+            container.appendChild(img);
+        });
+
+        setupVisibilityObserver(container);
+    }
+
+    function startSlide(container) {
+        let imgs = container.querySelectorAll("img");
+        if (imgs.length === 0) return;
+
+        let index = 0;
+
+        // Avoid duplicate intervals
+        if (intervals[container.id]) return;
+
+        intervals[container.id] = setInterval(() => {
+            imgs[index].classList.remove("active");
+            index = (index + 1) % imgs.length;
+            imgs[index].classList.add("active");
+        }, 4000);
+    }
+
+    function stopSlide(container) {
+        clearInterval(intervals[container.id]);
+        intervals[container.id] = null;
+    }
+
+    function setupVisibilityObserver(container) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startSlide(container);   // Start slideshow when visible
+                } else {
+                    stopSlide(container);    // Stop slideshow when not visible
+                }
+            });
+        }, { threshold: 0.4 }); // 40% visible before activating
+
+        observer.observe(container);
+    }
+</script>
+
+
+</body>
+</html>
